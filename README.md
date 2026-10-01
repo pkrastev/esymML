@@ -25,7 +25,7 @@ parametric equation of state (EOS):
 |---|---|
 | `eos_v3_cli.f90`, `minpack_hybrd.f`, `Makefile.eos` | EOS generator, Fortran (`eos_v3_cli.x`) |
 | `eos_v3_cli.py`, `beta_numba.py` | EOS generator, Python; same output as the Fortran version |
-| `EOS_P_A18dvUIX.txt` | APR crust table, used below 0.075 fm<sup>−3</sup> (read at run time) |
+| `EOS_P_A18dvUIX.txt` | EOS table from which the crust is taken, below 0.075 fm<sup>−3</sup> (read at run time) |
 | `tov_ml_cli.f90`, `libtov.f90`, `libtov_h.f90`, `Makefile.tov` | Neutron-star sequences from an EOS file (`tov_ml_cli.x`); solver from [tovSolve](https://github.com/pkrastev/tovSolve) |
 | `esym_data.py` | Data preparation for the DNNs (filter, inputs, split, scaler) |
 | `train_esym_dnn.py` | DNN training (M–R or M–Λ input) |
@@ -142,7 +142,9 @@ x = (ρ − ρ<sub>0</sub>)/3ρ<sub>0</sub>:
 - sampled uniformly: L ∈ [30.6, 86.8] MeV, K<sub>sym</sub> ∈ [−400, 100] MeV
   (and J<sub>0</sub> ∈ [−800, 400], J<sub>sym</sub> ∈ [−200, 800] MeV without `--paper`)
 
-Neutron-star matter is n, p, e, μ in β-equilibrium, with the APR crust below 0.075 fm<sup>−3</sup>.
+Neutron-star matter is n, p, e, μ in β-equilibrium. The crust, below 0.075 fm<sup>−3</sup>, is taken
+from the supplied table `EOS_P_A18dvUIX.txt`: the EOS of Pethick et al. for the inner crust and of
+Haensel and Pichon for the outer crust (references below).
 An EOS is rejected if E<sub>0</sub> or E<sub>sym</sub> is negative at 1.35 fm<sup>−3</sup>, if the β-equilibrium
 solve fails, for pure neutron matter at the highest densities, or for negative pressure or negative speed of sound squared
 (without `--paper` also if the pressure at the top of the table is below 1200 MeV fm<sup>−3</sup>).
@@ -243,6 +245,7 @@ If you use this code, please cite the paper (see also `CITATION.cff`):
 ## License
 
 MIT License, see `LICENSE`. The repository contains code derived from MINPACK, NumPy, SciPy and
-the Mersenne Twister, under their own licenses; see `THIRD_PARTY_NOTICES.md`. The crust table
-`EOS_P_A18dvUIX.txt` is based on the APR equation of state (A. Akmal, V. R. Pandharipande and
-D. G. Ravenhall, Phys. Rev. C **58**, 1804 (1998)).
+the Mersenne Twister, under their own licenses; see `THIRD_PARTY_NOTICES.md`. The crust EOS in
+`EOS_P_A18dvUIX.txt` is that of C. J. Pethick, D. G. Ravenhall and C. P. Lorenz, Nucl. Phys. A
+**584**, 675 (1995) (inner crust) and of P. Haensel and B. Pichon, Astron. Astrophys. **283**,
+313 (1994) (outer crust).
