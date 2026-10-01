@@ -12,11 +12,11 @@ M(R), or the mass–tidal-deformability relation M(Λ). The training data are bu
 parametric equation of state (EOS):
 
 ```
- parametric EOS          neutron stars             DNN training               figures
- eos_v3_cli.x / .py  ->  tov_ml_cli.x          ->  train_esym_dnn.py      ->  figures_v2.ipynb
- eos_*.h5               ns_*.h5                   models/                     figures/
- (L, Ksym sampled;      (M, R, lambda, k2, I,     (M-R and M-Lambda           (MR_EOS_v3.ipynb:
-  beta-stable npe-mu)    beta for 50 stars/EOS)    input)                      training analysis)
+ Parametric EOS            Neutron Stars             DNN Training               Figures
+ eos_v3_cli.x / (.py)  =>  tov_ml_cli.x          =>  train_esym_dnn.py      =>  figures_v2.ipynb
+ eos_*.h5                  ns_*.h5                   models/                    figures/
+ ( L, Ksym sampled;        ( M, R, lambda, k2, I,    ( M-R and M-Lambda         ( MR_EOS_v3.ipynb:
+   beta-stable npe-mu )      beta for 50 stars/EOS)    input )                      training analysis )
 ```
 
 ## Contents
