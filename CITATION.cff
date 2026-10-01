@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the article below."
+title: "esymML: nuclear symmetry energy from neutron-star observations with deep neural networks"
+authors:
+  - family-names: Krastev
+    given-names: Plamen G.
+    affiliation: "Research Computing, Faculty of Arts and Sciences, Harvard University"
+license: MIT
+keywords:
+  - neutron stars
+  - nuclear symmetry energy
+  - equation of state
+  - deep neural networks
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Krastev
+      given-names: Plamen G.
+      affiliation: "Research Computing, Faculty of Arts and Sciences, Harvard University"
+  title: "Translating Neutron Star Observations to Nuclear Symmetry Energy via Deep Neural Networks"
+  journal: Galaxies
+  volume: 10
+  issue: 1
+  start: 16
+  year: 2022
+  doi: 10.3390/galaxies10010016

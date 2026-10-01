@@ -1,0 +1,25 @@
+# Python environment for esymML (the versions the code was tested with)
+#   conda env create -f environment.yml
+#   conda activate esymml
+name: esymml
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy=1.26.4
+  - scipy=1.12.0
+  - h5py=3.10.0
+  - pandas=2.2.1
+  - matplotlib=3.8.3
+  - scikit-learn=1.4.1
+  - libblas=*=*openblas         # LAPACK from OpenBLAS (also linked by eos_v3_cli.x)
+  - liblapack
+  - libopenblas=0.3.26           # version used for the published data (bit-for-bit reproduction)
+  - jupyter
+  - nbformat
+  - nbconvert
+  - pip
+  - pip:
+    - tensorflow[and-cuda]==2.17.1
+    - keras==3.9.2
+    - numba==0.67.0

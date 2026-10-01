@@ -1,0 +1,34 @@
+#================================================
+# Makefile.tov: tov_ml_cli.x, NS sequences from an HDF5 EOS file
+#   make -f Makefile.tov
+#   make -f Makefile.tov clean
+# Solver: tovSolve (libtov.f90, libtov_h.f90), pseudo-enthalpy formalism.
+# Needs HDF5_INCLUDE and HDF5_LIB (HDF5 Fortran built with ifx); see README.md
+#================================================
+F90COMPILER = ifx
+F90CFLAGS   = -c -O2
+PRO         = tov_ml_cli
+INC         = -I ${HDF5_INCLUDE}
+LIBS        = -L${HDF5_LIB} -lhdf5 -lhdf5_fortran
+
+OBJECTS = libtov.o   \
+          libtov_h.o \
+          tov_ml_cli.o
+
+${PRO}.x : $(OBJECTS)
+	$(F90COMPILER) -o ${PRO}.x $(OBJECTS) $(LIBS)
+
+%.o : %.f90
+	$(F90COMPILER) $(F90CFLAGS) $(INC) $(<F)
+
+# -no-vec: keeps log10 in SET_EOS scalar, so an EOS from HDF5 gives the
+# same tables (and stars) as the same EOS read from a file by LOAD_EOS
+libtov.o : libtov.f90
+	$(F90COMPILER) $(F90CFLAGS) -no-vec $(<F)
+
+# libtov_h.f90 and tov_ml_cli.f90 use the modules of libtov.f90
+libtov_h.o tov_ml_cli.o : libtov.o
+
+# Only the files of this build (Makefile.eos builds in the same directory)
+clean :
+	rm -f $(OBJECTS) ${PRO}.x constants.mod eos.mod terminate.mod tov_control.mod

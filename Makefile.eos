@@ -1,0 +1,29 @@
+#================================================
+# Makefile.eos: eos_v3_cli.x, Fortran version of eos_v3_cli.py
+#   make -f Makefile.eos [LAPACK="-L$CONDA_PREFIX/lib -llapack"]
+#   make -f Makefile.eos clean
+# Strict floating point (no FMA, no flush-to-zero) and the same LAPACK
+# as SciPy are required to reproduce the Python version bit for bit.
+# Needs HDF5_INCLUDE and HDF5_LIB (HDF5 Fortran built with ifx); see README.md
+#================================================
+F90COMPILER = ifx
+F90CFLAGS   = -c -O2 -fp-model=strict -no-fma -no-ftz
+PRO         = eos_v3_cli
+INC         =  -I ${HDF5_INCLUDE}
+LAPACK      = -llapack
+LIBS        = -L${HDF5_LIB} -lhdf5 -lhdf5_fortran $(LAPACK) -ldl
+
+OBJECTS = minpack_hybrd.o \
+          eos_v3_cli.o
+
+${PRO}.x : $(OBJECTS)
+	$(F90COMPILER) -o ${PRO}.x $(OBJECTS) $(LIBS)
+
+%.o : %.f90
+	$(F90COMPILER) $(F90CFLAGS) $(INC) $(<F)
+
+%.o : %.f
+	$(F90COMPILER) $(F90CFLAGS) $(<F)
+
+clean :
+	rm -f $(OBJECTS) ${PRO}.x eos3_*.mod

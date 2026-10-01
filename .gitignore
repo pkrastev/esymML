@@ -1,0 +1,18 @@
+# Build products (Makefile.eos, Makefile.tov)
+*.o
+*.mod
+*.x
+
+# Python, Numba cache, Jupyter
+__pycache__/
+*.nbi
+*.nbc
+.ipynb_checkpoints/
+
+# Data files (large; see "Data" in README.md) -- but keep the trained weights
+*.h5
+!models/*.weights.h5
+
+# Training by-products
+*.log
+models/*_best.keras
